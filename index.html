@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Jeudi Banner</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Comic+Neue:wght@400;700&display=swap');
+        
+        .banner {
+            width: 970px;
+            height: 70px;
+            background: linear-gradient(135deg, #800000 0%, #a00000 50%, #800000 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            box-sizing: border-box;
+            font-family: 'Comic Neue', cursive;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 3px solid #FFD700;
+        }
+        
+        .left-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            flex: 1;
+            z-index: 2;
+        }
+        
+        .banner h1 {
+            margin: 0;
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            transform: rotate(-2deg);
+        }
+        
+        .banner h2 {
+            margin: -2px 0 0 5px;
+            font-size: 13px;
+            font-weight: 400;
+            color: #FFE4B5;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            font-style: italic;
+        }
+        
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            margin: 0 20px;
+            z-index: 2;
+        }
+        
+        .banner h3 {
+            margin: 0;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            text-align: center;
+            transform: rotate(1deg);
+        }
+        
+        .date-info {
+            margin: 3px 0 0 0;
+            font-size: 11px;
+            color: #FFE4B5;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .cta-button {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #800000;
+            padding: 10px 20px;
+            border: 3px solid white;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            text-shadow: none;
+            font-family: 'Comic Neue', cursive;
+            transform: rotate(-1deg);
+            z-index: 2;
+            position: relative;
+        }
+        
+        .cta-button:hover {
+            transform: rotate(-1deg) translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+            background: linear-gradient(45deg, #FFA500, #FFD700);
+        }
+        
+        .decorative-element {
+            position: absolute;
+            right: 180px;
+            top: 5px;
+            font-size: 45px;
+            opacity: 0.4;
+            color: #FFD700;
+            transform: rotate(15deg);
+            z-index: 1;
+        }
+        
+        .decorative-element2 {
+            position: absolute;
+            left: 280px;
+            top: 8px;
+            font-size: 25px;
+            opacity: 0.3;
+            color: #FFA500;
+            transform: rotate(-10deg);
+            z-index: 1;
+        }
+        
+        .decorative-element3 {
+            position: absolute;
+            right: 300px;
+            bottom: 5px;
+            font-size: 20px;
+            opacity: 0.25;
+            color: #FFE4B5;
+            transform: rotate(25deg);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="decorative-element">☕</div>
+        <div class="decorative-element2">🥖</div>
+        <div class="decorative-element3">🍷</div>
+        
+        <div class="left-content">
+            <h1>Café Jeudi</h1>
+            <h2>Iedere donderdag van 18h00 tot +/- 19h30</h2>
+        </div>
+        
+        <div class="center-content">
+            <h3>Iedereen is van harte welkom</h3>
+            <div class="date-info" id="nextDate">Volgende: donderdag 11 september</div>
+        </div>
+        
+        <a href="https://meet.google.com/tht-gnem-jmu" target="_blank" class="cta-button">ENTREZ !!</a>
+    </div>
+    
+    <script>
+        // Functie om de datum bij te werken naar de eerstvolgende donderdag
+        function updateNextThursday() {
+            const today = new Date();
+            const nextThursday = new Date(today);
+            
+            // Bereken dagen tot volgende donderdag (4 = donderdag)
+            const daysUntilThursday = (4 - today.getDay() + 7) % 7;
+            const finalDays = daysUntilThursday === 0 ? 7 : daysUntilThursday; // Als het vandaag donderdag is, pak volgende week
+            
+            nextThursday.setDate(today.getDate() + finalDays);
+            
+            const options = { 
+                weekday: 'long', 
+                day: 'numeric', 
+                month: 'long'
+            };
+            
+            const formattedDate = nextThursday.toLocaleDateString('nl-NL', options);
+            
+            document.getElementById('nextDate').textContent = `Volgende: ${formattedDate}`;
+        }
+        
+        // Roep de functie aan om de datum bij te werken
+        // updateNextThursday();
+    </script>
+</body>
+</html>
